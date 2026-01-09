@@ -1,0 +1,281 @@
+/* Excalidraw Clone - Modern Design System */
+
+:root {
+  /* Color Palette */
+  --color-bg: #ffffff;
+  --color-canvas-bg: #fafafa;
+  --color-primary: #6965db;
+  --color-secondary: linear-gradient(45deg, #E8CBC0, #636FA4);
+  --color-secondary-hover: linear-gradient(45deg, #e8cbc0d7, #636fa4da);
+  --color-primary-hover: #5753c5;
+  --color-primary-active: #4845a8;
+  --color-text: #1e1e1e;
+  --color-text-secondary: #6b6b6b;
+  --color-border: #e0e0e0;
+  --color-selection: #6965db;
+  --color-selection-bg: rgba(105, 101, 219, 0.1);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --glass-blur: blur(10px);
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.excalidraw-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-canvas-bg);
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Canvas */
+.excalidraw-canvas {
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.excalidraw-canvas.selection-tool {
+  cursor: default;
+}
+
+.excalidraw-canvas.grabbing {
+  cursor: grabbing;
+}
+
+/* Toolbar */
+.excalidraw-toolbar {
+  position: absolute;
+  top: var(--spacing-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  z-index: 100;
+}
+
+.excalidraw-toolbar-divider {
+  width: 1px;
+  background: var(--color-border);
+  margin: 0 var(--spacing-xs);
+}
+
+/* Tool Button */
+.tool-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--color-text);
+  font-size: 18px;
+}
+
+.tool-button:hover {
+  background: rgba(105, 101, 219, 0.1);
+  transform: translateY(-1px);
+}
+
+.tool-button:active {
+  transform: translateY(0);
+}
+
+.tool-button.active {
+  background: var(--color-secondary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(105, 101, 219, 0.3);
+  transition: transform ease 0.3s;
+}
+
+.tool-button.active:hover {
+  transform: scale(1.04);
+  background: var(--color-secondary-hover);
+}
+
+.tool-button.delete {
+  color: #ef4444;
+}
+
+.tool-button.delete:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.tool-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tool-button:disabled:hover {
+  background: transparent;
+  transform: none;
+}
+
+/* Zoom Controls */
+.zoom-controls {
+  position: absolute;
+  bottom: var(--spacing-lg);
+  left: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  z-index: 100;
+}
+
+.zoom-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.zoom-button:hover {
+  background: rgba(105, 101, 219, 0.1);
+  color: var(--color-primary);
+}
+
+.zoom-button:active {
+  transform: scale(0.95);
+}
+
+.zoom-display {
+  min-width: 50px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  user-select: none;
+}
+
+/* Selection Highlight */
+.selection-box {
+  position: absolute;
+  border: 2px solid var(--color-selection);
+  background: var(--color-selection-bg);
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Tooltips */
+.tool-button::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all var(--transition-fast);
+}
+
+.tool-button:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.excalidraw-toolbar,
+.zoom-controls {
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .excalidraw-toolbar {
+    left: var(--spacing-sm);
+    right: var(--spacing-sm);
+    transform: none;
+    flex-wrap: wrap;
+  }
+
+  .zoom-controls {
+    bottom: var(--spacing-sm);
+    left: var(--spacing-sm);
+  }
+}
+
+/* Icon styles for SVG icons */
+.tool-icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
