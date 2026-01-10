@@ -19,8 +19,9 @@ export function useKeyboardShortcuts({
 }: UseKeyboardShortcutsProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      console.log(e.key, e.ctrlKey);
       // Delete key
-      if (e.key === 'Delete' || e.key === 'Backspace') {
+      if (e.ctrlKey && e.key.toLocaleUpperCase() === 'X') {
         if (selectedElementIds.length > 0) {
           e.preventDefault();
           deleteSelectedElements();
@@ -28,17 +29,17 @@ export function useKeyboardShortcuts({
       }
 
       // Tool shortcuts
-      if (e.key === 'v' || e.key === 'V') {
+      if ( e.ctrlKey && e.key.toLocaleUpperCase() === 'Q') {
         setSelectedTool(Tool.SELECTION);
-      } else if (e.key === '2' || e.key === '2') {
+      } else if (e.ctrlKey && e.key === '1') {
         setSelectedTool(Tool.RECTANGLE);
-      } else if (e.key === '3' || e.key === '3') {
+      } else if (e.ctrlKey && e.key === '2' ) {
         setSelectedTool(Tool.CIRCLE);
-      } else if (e.key === '4' || e.key === '4') {
+      } else if (e.ctrlKey && e.key === '3') {
         setSelectedTool(Tool.LINE);
-      } else if (e.key === '5' || e.key === '5') {
+      } else if (e.ctrlKey && e.key === '4') {
         setSelectedTool(Tool.ARROW);
-      } else if (e.key === '6' || e.key === '6') {
+      } else if (e.ctrlKey && e.key === '5') {
         setSelectedTool(Tool.TEXT);
       }
 
