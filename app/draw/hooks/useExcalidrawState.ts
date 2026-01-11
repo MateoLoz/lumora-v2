@@ -18,6 +18,7 @@ export function useExcalidrawState() {
 
   /**
    * Add a new element to the canvas
+   * TO-DO, Open side bar after a new element is created.
    */
   const addElement = useCallback((element: Element) => {
     setElements((prev) => [...prev, element]);
@@ -25,6 +26,7 @@ export function useExcalidrawState() {
 
   /**
    * Update an existing element
+   * TO-DO Close side-bar after the element is updated.
    */
   const updateElement = useCallback((id: string, updates: Partial<Element>) => {
     setElements((prev) =>
@@ -34,6 +36,7 @@ export function useExcalidrawState() {
 
   /**
    * Delete elements by IDs
+   * TO-DO: Close side-bar after the element is deleted.
    */
   const deleteElements = useCallback((ids: string[]) => {
     setElements((prev) => prev.filter((el) => !ids.includes(el.id)));
@@ -96,7 +99,7 @@ export function useExcalidrawState() {
             ...baseElement,
             type: ElementType.TEXT,
             text: 'Text',
-            fontSize: 16,
+            fontSize: 18,
             width: 50,
             height: 20,
           };

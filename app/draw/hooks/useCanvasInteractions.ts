@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { Element, ElementType, Tool, Point } from '../types';
 import { hitTest } from '../utils';
 
+
 interface UseCanvasInteractionsProps {
   selectedTool: Tool;
   elements: Element[];
@@ -37,15 +38,12 @@ export function useCanvasInteractions({
   const [currentElement, setCurrentElement] = useState<Element | null>(null);
   const [draggedElement, setDraggedElement] = useState<Element | null>(null);
   const [dragOffset, setDragOffset] = useState<Point>({ x: 0, y: 0 });
- const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+
 
 
   /**
    * Update sidebar state
    */
-   const toggleSideBar = () => {
-    setIsSideBarOpen(!isSideBarOpen);
-  };
   /**
    * Convert mouse event coordinates to canvas coordinates
    */
@@ -69,8 +67,8 @@ export function useCanvasInteractions({
       if (element.type === ElementType.LINE || element.type === ElementType.ARROW) {
         setCurrentElement({
           ...element,
-          x2: end.x,
-          y2: end.y,
+          x2:end.x,
+          y2:end.y
         });
       } else {
         const width = end.x - start.x;
@@ -184,7 +182,5 @@ export function useCanvasInteractions({
     handleMouseDown,
     handleMouseMove,
     handleMouseUp,
-    toggleSideBar,
-    isSideBarOpen,
   };
 }

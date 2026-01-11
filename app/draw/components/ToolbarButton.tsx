@@ -4,6 +4,7 @@ import { LineButton } from "./Buttons/LineButton";
 import { ArrowButton } from "./Buttons/ArrowButton";
 import { TextButton } from "./Buttons/TextButton";
 import { Tool } from "../types";
+import { useSideBar } from "../hooks/useSideBar";
 
 export const ToolbarButton = ({
     selectedTool,
@@ -12,6 +13,7 @@ export const ToolbarButton = ({
     selectedTool: Tool;
     onToolChange: (tool: Tool) => void;
 }) => {
+    const ctx = useSideBar();
     return (
        <>
        <RectangleButton selectedTool={selectedTool} onToolChange={onToolChange} tool={Tool.RECTANGLE} dataTooltip="Rectangle (1)" tooltip={"1"}/>

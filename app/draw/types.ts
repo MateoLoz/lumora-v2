@@ -41,6 +41,8 @@ export interface Element {
   // For text
   text?: string;
   fontSize?: number;
+  fontFamily?: string;
+  onClick?: () => void;
 }
 
 export interface AppState {

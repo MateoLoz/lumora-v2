@@ -8,6 +8,7 @@ export function useSideBar() {
     }
     return {
         isOpen: context.isSideBarOpen,
-        toggleSideBar: context.toggleSideBar
+        OpenSideBar: context.openSideBar,
+        CloseSideBar: context.closeSideBar
     };
 }

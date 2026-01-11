@@ -3,6 +3,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Element, ElementType, Point } from '../types';
 import { getElementBounds, drawArrowHead } from '../utils';
+import { useSideBar } from '../hooks/useSideBar';
 
 interface CanvasProps {
   elements: Element[];
@@ -14,8 +15,6 @@ interface CanvasProps {
   onMouseMove: (e: React.MouseEvent<HTMLCanvasElement>) => void;
   onMouseUp: (e: React.MouseEvent<HTMLCanvasElement>) => void;
   isSelectionTool: boolean;
-  isSideBarOpen: boolean;
-  toggleSideBar: () => void;
 }
 
 export default function Canvas({
@@ -28,10 +27,10 @@ export default function Canvas({
   onMouseMove,
   onMouseUp,
   isSelectionTool,
-  isSideBarOpen,
-  toggleSideBar,
 }: CanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const {isOpen, CloseSideBar, OpenSideBar} = useSideBar();
 
   // Setup canvas with proper DPI
   useEffect(() => {
@@ -74,6 +73,7 @@ export default function Canvas({
     // Draw all elements
     [...elements, currentElement].forEach((element) => {
       if (!element) return;
+     
       drawElement(ctx, element);
     });
 
@@ -81,6 +81,7 @@ export default function Canvas({
     selectedElementIds.forEach((id) => {
       const element = elements.find((el) => el.id === id);
       if (element) {
+        element.onClick == OpenSideBar();
         drawSelectionBox(ctx, element);
       }
     });
@@ -95,7 +96,7 @@ export default function Canvas({
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
       onMouseUp={onMouseUp}
-      onClick={()=> !isSideBarOpen ? toggleSideBar() : null}
+      onDoubleClick={CloseSideBar}
     />
   );
 }
@@ -110,6 +111,8 @@ function drawElement(ctx: CanvasRenderingContext2D, element: Element) {
 
   switch (element.type) {
     case ElementType.RECTANGLE:
+      ctx.beginPath();
+      ctx.moveTo(element.x, element.y);
       ctx.strokeRect(element.x, element.y, element.width, element.height);
       break;
 
@@ -145,7 +148,8 @@ function drawElement(ctx: CanvasRenderingContext2D, element: Element) {
       break;
 
     case ElementType.TEXT:
-      ctx.font = `${element.fontSize || 16}px sans-serif`;
+      ctx.beginPath();
+      ctx.font = `${element.fontSize || 18}px Segoia-UI`;
       ctx.fillText(element.text || '', element.x, element.y);
       break;
   }
@@ -156,7 +160,7 @@ function drawElement(ctx: CanvasRenderingContext2D, element: Element) {
  */
 function drawSelectionBox(ctx: CanvasRenderingContext2D, element: Element) {
   const bounds = getElementBounds(element);
-  const padding = 8;
+  const padding = 6;
 
   ctx.strokeStyle = '#7d6dd6ff';
   ctx.lineWidth = 2;
@@ -179,6 +183,7 @@ function drawSelectionBox(ctx: CanvasRenderingContext2D, element: Element) {
     { x: bounds.minX - padding, y: bounds.maxY + padding }, // bottom-left
     { x: bounds.maxX + padding, y: bounds.maxY + padding }, // bottom-right
   ];
+
 
   ctx.fillStyle = '#7567c4ff';
   handles.forEach((handle) => {
