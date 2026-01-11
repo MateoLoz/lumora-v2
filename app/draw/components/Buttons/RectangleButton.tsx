@@ -16,7 +16,7 @@ export const RectangleButton = ({
     return (
          <button
               className={`tool-button ${selectedTool === tool ? 'active' : ''}`}
-              onClick={() => onToolChange(tool)}
+              onClick={() => {onToolChange(tool)}}
               data-tooltip={dataTooltip}
               aria-label={tooltip}
             >

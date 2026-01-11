@@ -3,7 +3,8 @@ import { createContext } from "react";
 
 interface SideBarContextType {
     isSideBarOpen: boolean;
-    toggleSideBar: () => void;
+    openSideBar: () => void;
+    closeSideBar: () => void;
 }
 
 export const SideBarContext = createContext<SideBarContextType | null>(null);

@@ -32,7 +32,7 @@ export default function ExcalidrawPage() {
   const { zoom, panOffset, zoomIn, zoomOut, resetZoom } = useZoom();
 
   // Canvas interactions
-  const { currentElement, handleMouseDown, handleMouseMove, handleMouseUp, toggleSideBar, isSideBarOpen } =
+  const { currentElement, handleMouseDown, handleMouseMove, handleMouseUp } =
     useCanvasInteractions({
       selectedTool,
       elements,
@@ -55,6 +55,7 @@ export default function ExcalidrawPage() {
     clearSelection,
   });
 
+
   return (
     <SideBarProvider>
     <div className="excalidraw-container">
@@ -67,8 +68,6 @@ export default function ExcalidrawPage() {
        <SideBar/>
       <Canvas
         elements={elements}
-        toggleSideBar={toggleSideBar}
-        isSideBarOpen={isSideBarOpen}
         selectedElementIds={selectedElementIds}
         currentElement={currentElement}
         zoom={zoom}

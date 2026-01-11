@@ -22,7 +22,7 @@ export default function Toolbar({
       <button
         className={`tool-button ${selectedTool === Tool.SELECTION ? 'active' : ''}`}
         onClick={() => onToolChange(Tool.SELECTION)}
-        data-tooltip="Selection (V)"
+        data-tooltip="Selection (Q)"
         aria-label="Selection tool"
       >
         <svg className="tool-icon" viewBox="0 0 24 24">

@@ -1,4 +1,5 @@
 import { useSideBar } from "../../hooks/useSideBar"
+import StrokeRow from "./Rows/StrokeRow";
 
 export const SideBar = () => {  
     const ctx = useSideBar();
@@ -7,10 +8,9 @@ export const SideBar = () => {
         <div style={{ 
             display: ctx.isOpen ? "block" : "none",
             opacity: ctx.isOpen ? 1 : 0 }} 
-        className="absolute z-10 left-4 top-20 p-4 rounded-md shadow-md"
-        onClick={ctx.toggleSideBar}
+        className="absolute z-20 left-4 top-20 p-4 rounded-md shadow-md"
         >
-            <h1>SideBar</h1>
+            <StrokeRow dataTooltip="#2221" tooltip="#2221"/>
         </div>
     )
 }
