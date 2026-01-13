@@ -1,0 +1,44 @@
+{
+    "DrawPage": {
+        "Navbar": {
+            "Selection": "Selección",
+            "rectangle": "Rectángulo",
+            "circle": "Círculo",
+            "Line": "Linea",
+            "Arrow": "Flecha",
+            "Text": "Texto",
+            "Square": "Cuadrado"
+        },
+        "SideBar": {
+            "LabelItems": {
+                "Trace": "Linea",
+                "Color": "Color",
+                "Colors": "Colores",
+                "Shadow": "Sombras",
+                "Opacity": "Opacidad",
+                "FontSize": "Tamaño de fuente",
+                "FontFamily": "Tipo de fuente",
+                "Layers": "Capas",
+                "Actions": "Acciones"
+            },
+            "FontItem": {
+                "extraSmall": "Muy Pequeña (12px)",
+                "small": "Pequeña (14px)",
+                "medium": "Media (16px)",
+                "large": "Grande (18px)",
+                "extraLarge": "Muy Grande (20px)"
+            },
+            "LayerItem": {
+                "sentToBack": "Enviar al final",
+                "moveBack": "Mover atrás",
+                "moveForward": "Mover adelante",
+                "bringToFront": "Traer al frente"
+            },
+            "ActionsItem": {
+                "delete": "Eliminar",
+                "duplicate": "Duplicar",
+                "Link": "Agregar Enlace"
+            }
+        }
+    }
+}
